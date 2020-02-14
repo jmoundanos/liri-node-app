@@ -1,1 +1,5 @@
-<h1>liri-node-app
+#Liri-node-app
+
+###Created by: Jennifer Moundanos
+
+##About this app:
