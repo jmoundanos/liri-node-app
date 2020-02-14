@@ -5,7 +5,9 @@ var fs = require("fs");
 var axios = require("axios");
 var moment = require("moment");
 var keys = require("./keys.js");
-var Spotify = require("node-spotify-api");
+var Spotify = require('node-spotify-api');
+var spotify = new Spotify(keys.spotify);
+
 
 
 //Define variable to retrieve user request
@@ -54,32 +56,47 @@ function findConcert(artist){
         
 }
 function findSong(songName){
-    if(!songName){
-        songName = "The Sign";
-    }else{
-        var spotify = new Spotify({id: keys["spotify"].id, secret: keys["spotify"].secret});
-        spotify.search("https://api.spotify.com/v1/search?q=track:" + songName +'&type=track&limit=10',
-        function(error, response) {
+   if(songName){
+       spotify.search({
+            type: "track",
+            query: songName
+        },function(error, response) {
             if (error){
                 return console.log(error);
             }
-            console.log("Artist: " + response.tracks.items[0].artists[0].name);
-            console.log("Song: " + response.tracks.items[0].name);
-            console.log("URL: " + response.tracks.items[0].preview_url);
-            console.log("Album: " + response.tracks.items[0].album.name);
-            
-        
-    });
+            var songs = response.tracks.items;
+            for(var i = 0; i < songs.length; i++){
+                console.log("Artist: " + songs[i].artists[0].name);
+                console.log("Song: " + songs[i].name);
+                console.log("URL: " + songs[i].preview_url);
+                console.log("Album: " + songs[i].album.name);
+            }
+        }
+       )}else{
+            spotify.search({
+                type: "track",
+                query: "The Sign"
+            },function(error, response) {
+                if (error){
+                    return console.log(error);
+                }
+                var songs = response.tracks.items;
+                for(var i = 0; i < songs.length; i++){
+                    console.log("Artist: " + songs[i].artists[0].name);
+                    console.log("Song: " + songs[i].name);
+                    console.log("URL: " + songs[i].preview_url);
+                    console.log("Album: " + songs[i].album.name);
+                }
+        }    
+    );
+}
+}
 
-}
-}
+
+
 function findMovie(movieTitle){
-    if(movieTitle == undefined){
-        movieTitle = "Mr Nobody"
-        console.log(movieTitle);
-    }
-    
-        //store queryUrl in variable
+    if(movieTitle){
+    //store queryUrl in variable
         var queryUrl = "https://www.omdbapi.com/?t=" + movieTitle + "&y=&plot=short&apikey=trilogy";
         //call OMDB api
         axios.get(queryUrl)
@@ -99,9 +116,27 @@ function findMovie(movieTitle){
                     return console.log(error);
                 }
               });
-            
-        
-}
+            }else{
+                queryUrl = "https://www.omdbapi.com/?t=Mr.Nobody&y=&plot=short&apikey=trilogy";
+                axios.get(queryUrl)
+                    .then(function(response){//if api responds display data
+                        console.log("Movie title: " + response.data.Title);
+                        console.log("Year released: " + response.data.Released);
+                        console.log("IMDB Rating: " + response.data.imdbRating);
+                        console.log("Rotten Tomatoes rating: " + response.data.Ratings[1].Value);
+                        console.log("Country produced: " + response.data.Country);
+                        console.log("Language: " + response.data.Language);
+                        console.log("Plot: " + response.data.Plot);
+                        console.log("Actors: " + response.data.Actors);
+                    })
+                    .catch(function(error) {
+                        // If the code experiences any errors it will log the error to the console.
+                        if (error) {
+                            return console.log(error);
+                        }
+                    });
+            }
+        }
 function doThis(){
     fs.readFile("random.txt", "utf8", function(error, data) {
         // If the code experiences any errors it will log the error to the console.
