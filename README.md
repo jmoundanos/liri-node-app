@@ -26,7 +26,30 @@ In Terminal, enter one of the following four commmands plus applicable data to r
 #### concert-this
 This command takes the name of an artist and returns the date, venue, and locations of their next concert.
 
-![Screenshot of concert-this](/assets/Screenshot(2).png)
+![Screenshot of concert-this](assets/concert.png)
+
+#### spotify-this-song
+This command takes the name of a song and returns the artists, the song name, the album the song is from, and a preview url for the song. 
+![Screenshot of spotify-this-song](assets/song.png)
+
+#### movie-this
+This command takes the name of a movie and returns the title, year the movie was released, imdb rating, Rotten Tomatoes rating, country of production, language and plot of the movie, and actors in the movie.
+![Screenshot of movie-this](assets/movie.png)
+
+#### do-what-it-says
+This command reads the random.txt file and uses data in there to perform the command requested. In this example, it is telling Liri to spotify-this the song "I Want it That Way".
+
+![Screenshot of do-what-it-says](assets/doThis.png)
+
+## Built With
+* Javascript
+* Node
+* NPM
+* Spotify API
+* Bands In Town API
+* OMDB API
+* Git
+* GitHub
 
 
-### *Created by: Jennifer Moundanos*
+### Code written by: Jennifer Moundanos

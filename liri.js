@@ -73,6 +73,7 @@ function findSong(songName){
                 console.log("Song: " + songs[i].name);
                 console.log("URL: " + songs[i].preview_url);
                 console.log("Album: " + songs[i].album.name);
+                console.log("")
             }
         }
        )}else{//set default song
@@ -110,6 +111,7 @@ function findMovie(movieTitle){
                 console.log("Language: " + response.data.Language);
                 console.log("Plot: " + response.data.Plot);
                 console.log("Actors: " + response.data.Actors);
+                console.log("");
             })
             .catch(function(error) {
                 // If the code experiences any errors it will log the error to the console.
