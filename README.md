@@ -14,7 +14,7 @@ Npm packages will be necessary to run Liri. Open your terminal  and install:
 * node-spotify-api
 * dotenv
 
-API keys are needed from **Bands In Town API** and **OMBD API**.
+API keys are needed from **Bands In Town API** and **OMDB API**.
 * [OMDB API](http://www.omdbapi.com)
 * [Bands In Town API](http://www.artists.bandsintown.com/bandsintown-api)
 
