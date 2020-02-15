@@ -40,6 +40,7 @@ function findConcert(artist){
     //call Bandsintown api
     axios.get(queryUrl)
         .then(function(response){//if api responds display data
+            console.log(artist);
             console.log("Name of venue: " + response.data[0].venue.name);
             console.log("Venue location: " + response.data[0].venue.city + ", " + response.data[0].venue.region);
             console.log("Date: " + moment(response.data[0].venue.date).format("MM/DD/YYYY"));
@@ -55,24 +56,26 @@ function findConcert(artist){
     }
         
 }
+//Function to find information about a song
 function findSong(songName){
    if(songName){
+       //call Spotify API
        spotify.search({
             type: "track",
             query: songName
         },function(error, response) {
             if (error){
-                return console.log(error);
+                return console.log(error);// If the code experiences any errors it will log the error to the console.
             }
-            var songs = response.tracks.items;
-            for(var i = 0; i < songs.length; i++){
+            var songs = response.tracks.items;//store reponse in variable
+            for(var i = 0; i < songs.length; i++){//loop through the response to display the data
                 console.log("Artist: " + songs[i].artists[0].name);
                 console.log("Song: " + songs[i].name);
                 console.log("URL: " + songs[i].preview_url);
                 console.log("Album: " + songs[i].album.name);
             }
         }
-       )}else{
+       )}else{//set default song
             spotify.search({
                 type: "track",
                 query: "The Sign"
@@ -91,9 +94,7 @@ function findSong(songName){
     );
 }
 }
-
-
-
+//Function to find information about a movie
 function findMovie(movieTitle){
     if(movieTitle){
     //store queryUrl in variable
@@ -116,7 +117,7 @@ function findMovie(movieTitle){
                     return console.log(error);
                 }
               });
-            }else{
+            }else{//set default movie
                 queryUrl = "https://www.omdbapi.com/?t=Mr.Nobody&y=&plot=short&apikey=trilogy";
                 axios.get(queryUrl)
                     .then(function(response){//if api responds display data
@@ -137,18 +138,16 @@ function findMovie(movieTitle){
                     });
             }
         }
+//Function to do command that is in random.txt
 function doThis(){
-    fs.readFile("random.txt", "utf8", function(error, data) {
-        // If the code experiences any errors it will log the error to the console.
-  if (error) {
-    return console.log(error);
-  }
-
-  // We will then print the contents of data
-  console.log(data);
-  var output = data.split(",");
-  var command = output[0];
-  var input = output[1];
-  start(command, input);
-})
+    fs.readFile("random.txt", "utf8", function(error, data) {//read data from txt file
+    if (error) {
+        return console.log(error); // If the code experiences any errors it will log the error to the console.
+    }
+    //Make data from txt file into an array
+    var output = data.split(",");
+    var command = output[0];
+    var input = output[1];
+    start(command, input);//Call start function with data from txt file
+    })
 }
