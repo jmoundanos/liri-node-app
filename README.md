@@ -24,6 +24,9 @@ The **spotify-this-song** command will require a client ID and client Secret fro
 ## To Use This App
 In Terminal, enter one of the following four commmands plus applicable data to retrieve information.
 #### concert-this
+This command takes the name of an artist and returns the date, venue, and locations of their next concert.
+
+![Screenshot of concert-this](/assets/Screenshot(2).png)
 
 
 ### *Created by: Jennifer Moundanos*
